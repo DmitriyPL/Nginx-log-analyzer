@@ -26,8 +26,8 @@ from statistics import median
 from shutil import copy2
 
 
-TEST_CASE = 1000   # Для отладки на ограниченной выборке, чтобы все не лопатить
-DEBUG_MODE = True  # Для отладки
+TEST_CASE = 1000    # Для отладки на ограниченной выборке, чтобы все не лопатить
+DEBUG_MODE = False  # Для отладки
 
 config = {
     "TEMPLATE_PATH": "./reports/report.html",    # Шаблон исходного отчета
@@ -35,7 +35,7 @@ config = {
     "REPORT_DIR": "./reports",                   # Путь куда пишется отчет
     "LOG_DIR": "./log",                          # Путь откуда читаются исходные логи
     "ERRORS_LIMIT_PERC": 5,                      # Допустимая ошибка парсинга в %
-    "SELF_LOG_PATH": "./log/log_analyzer.log"  # Путь к собственныи логам программы
+    "SELF_LOG_PATH": "./log/log_analyzer.log"    # Путь к собственныи логам программы
     # "SELF_LOG_PATH": None
 }
 
