@@ -21,13 +21,13 @@ import re
 
 
 from collections import namedtuple
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 from statistics import median
 from shutil import copy2
 
 
-TEST_CASE = 1000    # Для отладки на ограниченной выборке, чтобы все не лопатить
-DEBUG_MODE = False  # Для отладки
+TEST_CASE = 100000    # Для отладки на ограниченной выборке, чтобы все не лопатить
+DEBUG_MODE = False    # Для отладки
 
 config = {
     "TEMPLATE_PATH": "./reports/report.html",    # Шаблон исходного отчета
@@ -438,7 +438,7 @@ def main():
 
     logger.info(str_finish)
 
-    logger.debug("Время выполнения программы: {}".format(time.time() - star_time))
+    logger.debug("Время выполнения программы: {}".format(timedelta(seconds=(time.time() - star_time))))
 
 
 if __name__ == "__main__":
