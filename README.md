@@ -1,5 +1,5 @@
 # home_work_1
-nginx_log_analyzer
+**nginx_log_analyzer**
 
 Скрипт парсит логи nginx и выдает отчет со статистикой по запросам ввиде .html файла
 
