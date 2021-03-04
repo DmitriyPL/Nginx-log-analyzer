@@ -1,19 +1,19 @@
 # home_work_1
 **nginx_log_analyzer**
 
-1. Скрипт парсит логи nginx и выдает отчет со статистикой по запросам ввиде .html файла
+1. Скрипт парсит логи **nginx** и выдает отчет со статистикой по запросам ввиде **.html** файла
 
-Структура лога:
+2. Структура лога:
 
-log_format ui_short '$remote_addr  $remote_user $http_x_real_ip [$time_local] "$request" '
-                     '$status $body_bytes_sent "$http_referer" '
-                     '"$http_user_agent" "$http_x_forwarded_for" "$http_X_REQUEST_ID" "$http_X_RB_USER" '
-                     '$request_time';
+  log_format ui_short '$remote_addr  $remote_user $http_x_real_ip [$time_local] "$request" '
+                      '$status $body_bytes_sent "$http_referer" '
+                      '"$http_user_agent" "$http_x_forwarded_for" "$http_X_REQUEST_ID" "$http_X_RB_USER" '
+                      '$request_time';
 
-При запуске скрипта можно указать путь до config файла:
+3. При запуске скрипта можно указать путь до config файла:
   python log_analyzer.py --config "Путь"
   
-Файл config-a имеет формат .json и следующую структуру:
+4. Файл config-a имеет формат .json и следующую структуру:
 
 {
     "TEMPLATE_PATH": "./reports/report.html",    # Шаблон исходного отчета
@@ -25,9 +25,9 @@ log_format ui_short '$remote_addr  $remote_user $http_x_real_ip [$time_local] "$
     # "SELF_LOG_PATH": None                      # Вывод логов в stdout
 }
 
-Название логов имеет структуру:
-  nginx-access-ui.log-20170630 (меняется только дата)
-  nginx-access-ui.log-20170630.gz (лог может быть запакован)
+-[x] 5.Название логов имеет структуру:
+  -[x] nginx-access-ui.log-20170630 (меняется только дата)
+  -[x] nginx-access-ui.log-20170630.gz (лог может быть запакован)
 
 Парсер возьмет из указаном папки последний лог (определить по названию файла)
 
