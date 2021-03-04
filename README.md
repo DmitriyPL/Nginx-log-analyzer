@@ -15,14 +15,15 @@
   
 - Файл config-a имеет формат .json и следующую структуру:
 
-- {
+{
+***
     - "TEMPLATE_PATH": "./reports/report.html",    # Шаблон исходного отчета
     - "REPORT_SIZE": 1000,                         # Колво записей в итоговом отчете
     - "REPORT_DIR": "./reports",                   # Путь куда пишется отчет
     - "LOG_DIR": "./log",                          # Путь откуда читаются исходные логи
     - "ERRORS_LIMIT_PERC": 5,                      # Допустимая ошибка парсинга в %
     - "SELF_LOG_PATH": "./log/log_analyzer.log"    # Путь к собственныи логам программы
-    - # "SELF_LOG_PATH": None                      # Вывод логов в stdout
+    -  "SELF_LOG_PATH": None                      # Вывод логов в stdout
 - }
 
 - Название логов имеет структуру:
