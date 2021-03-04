@@ -13,7 +13,7 @@
 ```
 
 3. При запуске скрипта можно указать путь до config файла:
-  python log_analyzer.py --config "Путь"
+    - '''python log_analyzer.py --config "Путь"'''
   
 4. Файл config-a имеет формат .json и следующую структуру:
 
