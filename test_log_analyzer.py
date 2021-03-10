@@ -1,13 +1,14 @@
-import re
 import unittest
+import os
+import re
+
 
 from log_analyzer import create_logger
-from log_analyzer import compare_config
-from log_analyzer import get_date_from_name
+from log_analyzer import get_result_config
 from log_analyzer import get_parsed_line
+from log_analyzer import find_latest_log
 
 from test_data import compare_tests
-from test_data import date_from_name_tests
 from test_data import parsed_line_tests
 
 logger = create_logger("test")
@@ -15,15 +16,10 @@ logger = create_logger("test")
 
 class LogAnalyzerTest(unittest.TestCase):
 
-    def test_compare_config(self):
+    def test_get_result_config(self):
 
-        for def_config, user_config, res_config in compare_tests:
-            self.assertEqual(compare_config(def_config, user_config, logger), res_config)
-
-    def test_get_date_from_name(self):
-
-        for file_name, str_date in date_from_name_tests:
-            self.assertEqual(get_date_from_name(file_name), str_date)
+        for def_config, config_path, res_config in compare_tests:
+            self.assertEqual(get_result_config(def_config, config_path), res_config)
 
     def test_get_parsed_line(self):
 
@@ -31,6 +27,10 @@ class LogAnalyzerTest(unittest.TestCase):
 
         for log_str, tlp in parsed_line_tests:
             self.assertEqual(get_parsed_line(regex, log_str, logger), tlp)
+
+    def test_find_latest_log(self):
+        latest_log = find_latest_log("./tests/latest_log/", logger)
+        self.assertEqual(os.path.basename(latest_log.f_path), "nginx-access-ui.log-20180730")
 
 
 if __name__ == "__main__":

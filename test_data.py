@@ -8,21 +8,15 @@ compare_tests = [
             "REPORT_DIR": "./reports",
             "LOG_DIR": "./log",
             "ERRORS_LIMIT_PERC": 5,
-            # "SELF_LOG_PATH": "./log/log_analyzer.log"
             "SELF_LOG_PATH": None
         },
+        "./tests/user_config/user_config_1.json",
         {
-            "REPORT_SIZE": 10,
-            "REPORT_DIR": "C:\\reports",
-            "LOG_DIR": "C:\\logs"
-        },
-        {
-            "TEMPLATE_PATH": "./reports/report.html",
             "REPORT_SIZE": 10,
             "REPORT_DIR": "C:\\reports",
             "LOG_DIR": "C:\\logs",
+            "TEMPLATE_PATH": "./reports/report.html",
             "ERRORS_LIMIT_PERC": 5,
-            # "SELF_LOG_PATH": "./log/log_analyzer.log"
             "SELF_LOG_PATH": None
         }
     ),
@@ -33,29 +27,19 @@ compare_tests = [
             "REPORT_DIR": "./reports",
             "LOG_DIR": "./log",
             "ERRORS_LIMIT_PERC": 5,
-            # "SELF_LOG_PATH": "./log/log_analyzer.log"
-            "SELF_LOG_PATH": None
+            "SELF_LOG_PATH": "./log/log_analyzer.log"
+
         },
-        {
-        },
+        "./tests/user_config/user_config_2.json",
         {
             "TEMPLATE_PATH": "./reports/report.html",
             "REPORT_SIZE": 1000,
             "REPORT_DIR": "./reports",
             "LOG_DIR": "./log",
             "ERRORS_LIMIT_PERC": 5,
-            # "SELF_LOG_PATH": "./log/log_analyzer.log"
-            "SELF_LOG_PATH": None
+            "SELF_LOG_PATH": "./log/log_analyzer.log"
         }
     )
-]
-
-date_from_name_tests = [
-    ("nginx-access-ui.log-20170630", datetime.strptime("20170630", '%Y%m%d')),
-    ("nginx-access-ui.log-20170630.gz", datetime.strptime("20170630", '%Y%m%d')),
-    ("nginx-access-ui.log-20170630.bz2", datetime.strptime("20170630", '%Y%m%d')),
-    ("nginx-ui.log-20170630.bz2", datetime.strptime("20170630", '%Y%m%d')),
-    ("20170630", datetime.strptime("20170630", '%Y%m%d'))
 ]
 
 parsed_line_tests = [
