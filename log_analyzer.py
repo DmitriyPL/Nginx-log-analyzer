@@ -61,10 +61,7 @@ def get_result_config(default_config, config_path):
     try:
         with open(config_path, 'r') as config_file:
             result_config = json.load(config_file)
-        for key in default_config:
-            if result_config.get(key) is None:
-                result_config[key] = default_config[key]
-        return result_config
+        return {**default_config, **result_config}  # Что бы не трогать дефолтный конфиг!
     except ValueError:
         return None
 
@@ -91,38 +88,6 @@ def create_logger(name, log_level=logging.DEBUG, stdout=True, file=None):
         logger.addHandler(ch)
 
     return logger
-
-
-def result_config_is_ok(result_config, logger):
-
-    is_ok = True
-
-    log_dir = result_config.get("LOG_DIR")
-    if not os.path.isdir(log_dir):
-        logger.info("Директории для поиска лога не существует: {}".format(log_dir))
-        is_ok = False
-
-    report_dir = result_config.get("REPORT_DIR")
-    if not os.path.isdir(report_dir):
-        logger.error("Указанная директория для записи отчета не существует: {}".format(report_dir))
-        is_ok = False
-
-    error_limits = result_config.get("ERRORS_LIMIT_PERC")
-    if error_limits is None:
-        logger.error("Не указан процент ошибок парсинга: ERRORS_LIMIT_PERC")
-        is_ok = False
-
-    report_size = result_config.get("REPORT_SIZE")
-    if report_size is None:
-        logger.error("Не задан размер отчета: REPORT_SIZE")
-        is_ok = False
-
-    template_path = result_config.get("TEMPLATE_PATH")
-    if not os.path.exists(template_path):
-        logger.error("Шаблон отчета по указонному пути не найден: {}".format(template_path))
-        is_ok = False
-
-    return is_ok
 
 
 def find_latest_log(log_dir, logger):
@@ -164,11 +129,11 @@ def find_latest_log(log_dir, logger):
         return None
 
 
-def report_exist(report_dir, latest_log, logger):
+def get_report_path(report_dir, latest_log, logger):
     '''
     Проверяем, существует ли отчет с таким именем в указанной dir.
-    Если да, да парсинг выполнялся и прошел успешно. Заканчиваем работу
-    Если нет, возвращаем dir для записи лога
+    Если да, да парсинг выполнялся и прошел успешно возвращаем None, заканчиваем работу.
+    Если нет, возвращаем path для записи отчета
     '''
 
     report_name = "report-{}.html".format(latest_log.f_date.strftime('%Y.%m.%d'))
@@ -336,16 +301,12 @@ def main():
     logger = create_logger(__name__, file=log_path)
     logger.info(str_start)
 
-    if not result_config_is_ok(result_config, logger):
-        logger.info(str_finish)
-        sys.exit(1)
-
     latest_log = find_latest_log(result_config["LOG_DIR"], logger)
     if latest_log is None:
         logger.info(str_finish)
         sys.exit(0)
 
-    report_path = report_exist(result_config["REPORT_DIR"], latest_log, logger)
+    report_path = get_report_path(result_config["REPORT_DIR"], latest_log, logger)
     if report_path is None:
         logger.info(str_finish)
         sys.exit(0)
